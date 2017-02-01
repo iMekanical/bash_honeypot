@@ -6,7 +6,7 @@ while true
  do
   if [[ -f blacklist_buffer ]]
    then
-    awk '{print $1}' ~/blacklist_buffer | uniq >> blacklist
+    awk '{print $1}' blacklist_buffer | uniq >> blacklist
     rm blacklist_buffer
   fi
   sort -u blacklist
