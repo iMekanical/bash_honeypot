@@ -1,14 +1,13 @@
 #!/bin/bash
-conntrack -E -p tcp --dport 3389 | sed 's/^.*dst=//' >> ~/blacklist_buffer &
-echo $! > ~/ban_hammer_rdp.pid
+conntrack -d $LISTENER_IP -E -p tcp --dport 3389 | sed 's/^.*dst=//' >> ~/blacklist_buffer &
+echo $! > ~/log_3389.pid
 while true
  do
-  if [ -f ~/blacklist_buffer ]
+  if [[ -f ~/blacklist_buffer ]]
    then
     awk '{print $1}' ~/blacklist_buffer | uniq >> ~/blacklist
     rm ~/blacklist_buffer
   fi
-  sort ~/blacklist | uniq >> blacklist2
-  mv ~/blacklist2 ~/blacklist
+  sort -u ~/blacklist
   sleep 60
  done
