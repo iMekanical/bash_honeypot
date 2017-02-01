@@ -35,7 +35,6 @@ else
    fi
    if [[ $ENTITY = "dst" ]] && [[ $CONTENT != $1 ]]; then
     LOGGED_IP=$CONTENT
-    #output to be run through sort -u -k1,1
     echo $LOGGED_IP, $HOUR:$MIN:$SEC, $DAY/$MONTH/$YEAR >> blacklist_buffer
    fi
   done
